@@ -82,3 +82,10 @@ EOF
 %dir %{_sysconfdir}/%{name}
 %{_datadir}/%{name}
 
+
+
+%changelog
+* Wed Nov 09 2011 Luis Daniel Lucio Quiroz <dlucio@mandriva.org> 0.4-1mdv2011.0
++ Revision: 729285
+- import phpipam
+
