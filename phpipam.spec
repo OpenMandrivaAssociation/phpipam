@@ -46,12 +46,12 @@ pushd  %{buildroot}%{_sysconfdir}/%{name}
     ln -s ../../%{_datadir}/%{name}/config.php config.php
 popd
 
-cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
+cat > %{buildroot}%{_webappconfdir}/%{name}.conf << EOF
 Alias /%{name} %{_datadir}/%{name}
 
 <Directory %{_datadir}/%{name}>
     Require local granted
-    ErrorDocument 403 "Access denied per %{webappconfdir}/%{name}.conf"
+    ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
 </Directory>
 EOF
 
