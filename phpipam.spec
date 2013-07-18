@@ -40,7 +40,7 @@ popd
 
 # provide a simple apache config
 install -d %{buildroot}%{_sysconfdir}/%{name}
-install -d -m 755 %{buildroot}%{webappconfdir}
+install -d -m 755 %{buildroot}%{_webappconfdir}
 
 pushd  %{buildroot}%{_sysconfdir}/%{name}
     ln -s ../../%{_datadir}/%{name}/config.php config.php
