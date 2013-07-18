@@ -1,14 +1,9 @@
-%define _exclude_files_from_autoprov %{_datadir}/%{name}/functions
-%define _requires_exceptions pear.functions.PEAR.OLE.php\\|pear.functions.PEAR.PEAR.php
-%if "%{distribution}" == "Mandriva Linux"
-        %if %mdkversion < 200900
-                %define ldflags  -Wl,--as-needed -Wl,--no-undefined -Wl,-z,relro -Wl,-O1 -Wl,--build-id
-        %endif
-%endif
+%define __noautoreqfiles %{_datadir}/%{name}/functions
+%define __noautoreq 'pear.functions.PEAR.OLE.php|pear.functions.PEAR.PEAR.php'
 
 Name:           phpipam
 Version:        0.4
-Release:        %mkrel 1
+Release:        2
 Summary:     	Open-source web IP address management application
 License:     	GPLv2+
 Group:       	Networking/Other
@@ -22,17 +17,11 @@ Requires:       php-pear
 BuildArch:      noarch
 AutoReqProv: 	1
 Suggests:	mysql
-Requires(post):   rpm-helper
-%if "%{distribution}" == "Mandriva Linux"
-        %if %mdkversion < 201010
-        Requires(postun):   rpm-helper
-        %endif
-%endif
-BuildRoot:  %{_tmppath}/%{name}-%{version}
+Requires(post): rpm-helper
 
 %description
 phpipam is an open-source web IP address management application. Its goal is 
-to provide light and simple |P address management. It is ajax-based using 
+to provide light and simple IP address management. It is ajax-based using 
 jQuery libraries, php scripts, javascript and some HTML5/CSS3 features
 
 %prep
@@ -41,8 +30,6 @@ jQuery libraries, php scripts, javascript and some HTML5/CSS3 features
 %build
 
 %install
-rm -rf %{buildroot}
-
 install -d %{buildroot}%{_datadir}/%{name}
 cp -aRf * %{buildroot}%{_datadir}/%{name}/
 
@@ -63,22 +50,17 @@ cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
 Alias /%{name} %{_datadir}/%{name}
 
 <Directory %{_datadir}/%{name}>
-    Order deny,allow
-    Deny from all
-    Allow from 127.0.0.1
+    Require local granted
     ErrorDocument 403 "Access denied per %{webappconfdir}/%{name}.conf"
 </Directory>
 EOF
-
-
-
 
 
 %files
 %defattr(0755,root,root)
 %doc INSTALL README UPDATE
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/%{name}/config.php
-%config(noreplace) %{webappconfdir}/%{name}.conf
+%config(noreplace) %{_webappconfdir}/%{name}.conf
 %dir %{_sysconfdir}/%{name}
 %{_datadir}/%{name}
 
