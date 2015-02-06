@@ -3,7 +3,7 @@
 
 Name:           phpipam
 Version:        0.4
-Release:        3
+Release:        4
 Summary:     	Open-source web IP address management application
 License:     	GPLv2+
 Group:       	Networking/Other
