@@ -7,7 +7,7 @@ Release:        4
 Summary:     	Open-source web IP address management application
 License:     	GPLv2+
 Group:       	Networking/Other
-URL:         	http://phpipam.sourceforge.net/
+URL:         	https://phpipam.sourceforge.net/
 Source0:     	%{name}-%{version}.tar
 Requires:       apache-mod_php
 Requires:       php-mysqli
